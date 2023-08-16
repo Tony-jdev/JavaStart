@@ -22,9 +22,9 @@ public class Task5 {
 
             if (month == 1 || month == 2 || month == 12) {
                 season = "Winter";
-            } else if (month >= 3 && month <= 5) {
+            } else if (month <= 5) {
                 season = "Spring";
-            } else if (month >= 6 && month <= 8) {
+            } else if (month <= 8) {
                 season = "Summer";
             } else {
                 season = "Autumn";
