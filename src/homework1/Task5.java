@@ -1,3 +1,5 @@
+package homework1;
+
 import java.util.Scanner;
 
 //Пользователь вводит с клавиатуры номер месяца (от
