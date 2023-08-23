@@ -1,6 +1,7 @@
-package homework2;
+package homework2and3;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 //Создайте класс «Страна». Необходимо хранить в полях
@@ -18,6 +19,42 @@ public class Task3 {
         private String phoneCode;
         private String capitalCity;
         private ArrayList<String> cities;
+
+        public Country() {}
+
+        public Country(String countryName) {
+            this.countryName = countryName;
+        }
+
+        public Country(String countryName, String continent) {
+            this(countryName);
+            this.continent = continent;
+        }
+
+        public Country(String countryName, int population) {
+            this(countryName);
+            this.population = population;
+        }
+
+        public Country(String countryName, String continent, int population) {
+            this(countryName, continent);
+            this.population = population;
+        }
+
+        public Country(String countryName, String continent, int population, String phoneCode) {
+            this(countryName, continent, population);
+            this.phoneCode = phoneCode;
+        }
+
+        public Country(String countryName, String continent, int population, String phoneCode, String capitalCity) {
+            this(countryName, continent, population, phoneCode);
+            this.capitalCity = capitalCity;
+        }
+
+        public Country(String countryName, String continent, int population, String phoneCode, String capitalCity, ArrayList<String> cities) {
+            this(countryName, continent, population, phoneCode, capitalCity);
+            this.cities = cities;
+        }
 
         private boolean isValidPopulation(String input) {
             try {
@@ -68,6 +105,40 @@ public class Task3 {
             System.out.println("Телефонний код: " + getPhoneCode());
             System.out.println("Столиця: " + getCapitalCity());
             System.out.println("Міста: " + getCities());
+        }
+
+        @Override
+        public String toString() {
+            return "Country{" +
+                    "countryName='" + countryName + '\'' +
+                    ", continent='" + continent + '\'' +
+                    ", population=" + population +
+                    ", phoneCode='" + phoneCode + '\'' +
+                    ", capitalCity='" + capitalCity + '\'' +
+                    ", cities=" + cities +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Country country = (Country) o;
+            return countryName.equals(country.countryName) &&
+                    continent.equals(country.continent) &&
+                    population == country.population &&
+                    phoneCode.equals(country.phoneCode) &&
+                    capitalCity.equals(country.capitalCity) &&
+                    cities.equals(country.cities);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(countryName, continent, population, phoneCode, capitalCity, cities);
         }
 
         public void setCountryName(String countryName) {
@@ -124,6 +195,12 @@ public class Task3 {
         country.inputDetails();
 
         System.out.println("\nВведені дані:");
-        country.showDetails();
+        System.out.println(country);
+
+        Country country1 = new Country();
+        country1.inputDetails();
+
+        System.out.println("\nЧи об'єкти однакові:");
+        System.out.println(country.equals(country1));
     }
 }

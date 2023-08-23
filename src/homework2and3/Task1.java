@@ -1,8 +1,9 @@
-package homework2;
+package homework2and3;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -20,6 +21,37 @@ public class Task1 {
         private String city;
         private String country;
         private String address;
+
+        public Person() {}
+
+        public Person(String fullName) {
+            this.fullName = fullName;
+        }
+
+        public Person(String fullName, Date birthDate) {
+            this(fullName);
+            this.birthDate = birthDate;
+        }
+
+        public Person(String fullName, Date birthDate, String phone) {
+            this(fullName, birthDate);
+            this.phone = phone;
+        }
+
+        public Person(String fullName, Date birthDate, String phone, String city) {
+            this(fullName, birthDate, phone);
+            this.city = city;
+        }
+
+        public Person(String fullName, Date birthDate, String phone, String city, String country) {
+            this(fullName, birthDate, phone, city);
+            this.country = country;
+        }
+
+        public Person(String fullName, Date birthDate, String phone, String city, String country, String address) {
+            this(fullName, birthDate, phone, city, country);
+            this.address = address;
+        }
 
         private boolean isValidPhoneNumber(String phoneNumber) {
             String phonePattern = "\\+380\\d{9}";
@@ -77,6 +109,40 @@ public class Task1 {
             System.out.println("Домашня адреса: " + getHomeAddress());
         }
 
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "fullName='" + fullName + '\'' +
+                    ", birthDate=" + birthDate +
+                    ", phone='" + phone + '\'' +
+                    ", city='" + city + '\'' +
+                    ", country='" + country + '\'' +
+                    ", address='" + address + '\'' +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            Person person = (Person) o;
+            return fullName.equals(person.fullName) &&
+                    birthDate.equals(person.birthDate) &&
+                    phone.equals(person.phone) &&
+                    city.equals(person.city) &&
+                    country.equals(person.country) &&
+                    address.equals(person.address);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(fullName, birthDate, phone, city, country, address);
+        }
+
         public void setFullName(String fullName) {
             this.fullName = fullName;
         }
@@ -131,6 +197,13 @@ public class Task1 {
         person.inputDetails();
 
         System.out.println("\nВведені дані:");
-        person.showDetails();
+        System.out.println(person);
+        System.out.println();
+
+        Person person1 = new Person();
+        person1.inputDetails();
+
+        System.out.println("\nЧи об'єкти однакові:");
+        System.out.println(person.equals(person1));
     }
 }

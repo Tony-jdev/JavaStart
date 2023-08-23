@@ -1,5 +1,6 @@
-package homework2;
+package homework2and3;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 //Создайте класс «Город». Необходимо хранить в полях класса: название города, название региона, название
@@ -16,6 +17,37 @@ public class Task2 {
         private int population;
         private String postalCode;
         private String phoneCode;
+
+        public City() {}
+
+        public City(String cityName) {
+            this.cityName = cityName;
+        }
+
+        public City(String cityName, String region) {
+            this(cityName);
+            this.region = region;
+        }
+
+        public City(String cityName, String region, String country) {
+            this(cityName, region);
+            this.country = country;
+        }
+
+        public City(String cityName, String region, String country, int population) {
+            this(cityName, region, country);
+            this.population = population;
+        }
+
+        public City(String cityName, String region, String country, int population, String postalCode) {
+            this(cityName, region, country, population);
+            this.postalCode = postalCode;
+        }
+
+        public City(String cityName, String region, String country, int population, String postalCode, String phoneCode) {
+            this(cityName, region, country, population, postalCode);
+            this.phoneCode = phoneCode;
+        }
 
         private boolean isValidPopulation(String input) {
             try {
@@ -59,6 +91,40 @@ public class Task2 {
             System.out.println("Кількість жителів: " + getPopulation());
             System.out.println("Поштовий індекс: " + getPostalCode());
             System.out.println("Телефонний код: " + getPhoneCode());
+        }
+
+        @Override
+        public String toString() {
+            return "City{" +
+                    "cityName='" + cityName + '\'' +
+                    ", region='" + region + '\'' +
+                    ", country='" + country + '\'' +
+                    ", population=" + population +
+                    ", postalCode='" + postalCode + '\'' +
+                    ", phoneCode='" + phoneCode + '\'' +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            City city = (City) o;
+            return cityName.equals(city.cityName) &&
+                    region.equals(city.region) &&
+                    country.equals(city.country) &&
+                    population == city.population &&
+                    postalCode.equals(city.postalCode) &&
+                    phoneCode.equals(city.phoneCode);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(cityName, region, country, population, postalCode, phoneCode);
         }
 
         public void setCityName(String cityName) {
@@ -115,6 +181,13 @@ public class Task2 {
         city.inputDetails();
 
         System.out.println("\nВведені дані:");
-        city.showDetails();
+        System.out.println(city);
+        System.out.println();
+
+        City city1 = new City();
+        city1.inputDetails();
+
+        System.out.println("\nЧи об'єкти однакові:");
+        System.out.println(city.equals(city1));
     }
 }

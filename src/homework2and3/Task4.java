@@ -1,4 +1,4 @@
-package homework2;
+package homework2and3;
 
 import java.util.Scanner;
 
@@ -12,6 +12,16 @@ public class Task4 {
     public static class Fraction {
         private int numerator;
         private int denominator;
+
+        public Fraction() {}
+
+        public Fraction(int numerator) {
+            this(numerator, 1);
+        }
+        public Fraction(int numerator, int denominator) {
+            this.numerator = numerator;
+            this.denominator = denominator;
+        }
 
         public void inputFraction() {
             Scanner scanner = new Scanner(System.in);
@@ -82,6 +92,32 @@ public class Task4 {
             return simplifiedFraction;
         }
 
+        @Override
+        public String toString() {
+            return numerator + "/" + denominator;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+
+            Fraction fraction = (Fraction) o;
+
+            return numerator == fraction.numerator && denominator == fraction.denominator;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = numerator;
+            result = 31 * result + denominator;
+            return result;
+        }
+
         public void setNumerator(int numerator) {
             this.numerator = numerator;
         }
@@ -111,6 +147,9 @@ public class Task4 {
 
         System.out.println("Введіть другу дріб:");
         fraction2.inputFraction();
+
+        System.out.println("\nЧи об'єкти однакові:");
+        System.out.println(fraction2.equals(fraction1));
 
         System.out.println("\nПерша дріб: ");
         fraction1.showFraction();
