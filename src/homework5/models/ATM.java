@@ -38,8 +38,8 @@ public class ATM {
     }
 
     public void depositBanknote(int nominal) throws ATMWrongNominalException {
-        if (nominal == 1 || nominal == 5) {
-            throw new ATMWrongNominalException("Не можна вносити купюри номіналом 1 або 5");
+        if (nominal != 50 && nominal != 100 && nominal != 200 && nominal != 500) {
+            throw new ATMWrongNominalException("Не можна вносити купюри номіналом " + nominal);
         }
 
         this.banknotes.put(nominal, this.banknotes.getOrDefault(nominal, 0) + 1);
