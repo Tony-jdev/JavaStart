@@ -1,0 +1,46 @@
+package homework9;
+
+import homework9.models.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Vehicle vehicle1 = new Vehicle(1, "Truck", 5000);
+        Vehicle vehicle2 = new Vehicle(2, "Van", 2000);
+        Vehicle vehicle3 = new Vehicle(3, "SUV", 3000);
+
+        Driver driver1 = new Driver(101, "John", 5);
+        Driver driver2 = new Driver(102, "Alice", 3);
+        Driver driver3 = new Driver(103, "Bob", 7);
+
+        Trip trip1 = new Trip(1, "Destination A", 1000, "Goods Type 1", 7, 5000);
+        Trip trip2 = new Trip(2, "Destination B", 1500, "Goods Type 2", 5,3000);
+        Trip trip3 = new Trip(3, "Destination A", 800, "Goods Type 3", 3, 1000);
+
+        Dispatcher dispatcher = new Dispatcher();
+        dispatcher.addDriver(driver1);
+        dispatcher.addDriver(driver3);
+        dispatcher.addDriver(driver2);
+
+        dispatcher.addVehicle(vehicle1);
+        dispatcher.addVehicle(vehicle2);
+        dispatcher.addVehicle(vehicle3);
+
+        dispatcher.saveAllDataToFile();
+
+        dispatcher.assignDriverToTrip(trip1);
+        dispatcher.assignDriverToTrip(trip2);
+        dispatcher.assignDriverToTrip(trip3);
+
+        dispatcher.completeTrip(trip1);
+        dispatcher.completeTrip(trip2);
+        dispatcher.completeTrip(trip3);
+
+        dispatcher.saveAllDataToFile();
+
+        dispatcher.loadAllDataFromFile();
+
+        System.out.println("\nСтатистика перевезень:");
+        dispatcher.printCargoPerDriverStatistics();
+        dispatcher.printCargoPerDestinationStatistics();
+    }
+}

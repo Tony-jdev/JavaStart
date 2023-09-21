@@ -1,0 +1,43 @@
+package homework9;
+
+import homework9.models.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Dispatcher dispatcher = new Dispatcher();
+
+        try{
+            dispatcher.loadAllDataFromFile();
+        }
+        catch(Exception e){}
+
+        System.out.println("Список водіїв:");
+        for (Driver driver : dispatcher.getDrivers()) {
+            System.out.println(driver.getName() + " (Стаж: " + driver.getExperience() + ")");
+        }
+
+        System.out.println("Список автомобілів:");
+        for (Vehicle vehicle : dispatcher.getVehicles()) {
+            System.out.println(vehicle.getVehicleId() + " " + vehicle.getType() + " (Грузопідйомність: " + vehicle.getCargoCapacity() + ")");
+        }
+
+        Trip newTrip = new Trip(2, "Destination A", 1000, "Тип грузу",
+                7, 1000);
+        Trip busyTrip = new Trip(3, "Destination B", 1000, "Тип грузу",
+                7, 1000);// Параметри тріпу
+
+        dispatcher.assignDriverToTrip(newTrip);
+
+        dispatcher.assignDriverToTrip(busyTrip);
+
+        dispatcher.completeTrip(newTrip);
+
+        System.out.println("\nСтатистика перевезень:");
+        dispatcher.printCargoPerDriverStatistics();
+        dispatcher.printCargoPerDestinationStatistics();
+        dispatcher.printMoneyPerDriverStatistics();
+
+        // Зберігаємо всі дані в файли (якщо потрібно)
+        dispatcher.saveAllDataToFile();
+    }
+}
